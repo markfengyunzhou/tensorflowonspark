@@ -24,14 +24,15 @@ wget https://codeload.github.com/yahoo/TensorFlowOnSpark/zip/master
 四个文件打包到zip
 zip -r mnist.zip *
 
-PYSPARK_DRIVER_PYTHON=Python.zip/bin/python3 \
-PYSPARK_PYTHON=Python.zip/bin/python3 \
-spark-submit --master yarn \
+PYSPARK_DRIVER_PYTHON=Python/bin/python3 \
+PYSPARK_PYTHON=Python/bin/python3 \
+spark-2.2.0-bin-hadoop2.7/bin/spark-submit \
+--master yarn \
 --deploy-mode cluster \
 --num-executors 4 \
 --executor-memory 4G \
---archives /home/hpe/data/mnist.zip#mnist,Python/Python.zip#Python \
-/home/hpe/TensorFlowOnSpark-master/examples/mnist/mnist_data_setup.py
+--archives hdfs:///data/mnist/mnist.zip#mnist,Python/Python.zip#Python /home/hpe/TensorFlowOnSpark/examples/mnist/mnist_data_setup.py \
+--output mnist/csv --format csv
 
 ## 5、下载ecosystem源码
 
