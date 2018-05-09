@@ -25,8 +25,11 @@ wget https://codeload.github.com/yahoo/TensorFlowOnSpark/zip/master
 
 ## 4、mnist文件转csv
 `四个文件打包到zip`
-spark 2.3 写成 PYSPARK_DRIVER_PYTHON=Python.zip/bin/python3
+
+spark 2.3 写成 PYSPARK_DRIVER_PYTHON=Python.zip/bin/python3。
+
 因为在2.3版本Python.zip#Python有bug
+
 `zip -r mnist.zip *`
 ```
 PYSPARK_DRIVER_PYTHON=Python/bin/python3 \
