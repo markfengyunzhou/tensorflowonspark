@@ -24,7 +24,7 @@ wget https://codeload.github.com/yahoo/TensorFlowOnSpark/zip/master
 ```
 
 ## 4、mnist文件转csv
-四个文件打包到zip
+`四个文件打包到zip`
 
 `zip -r mnist.zip *`
 ```
@@ -52,9 +52,9 @@ mvn clean package
 `hadoop dfs -put  /home/hpe/ecosystem/hadoop/target/tensorflow-hadoop-1.6.0.jar /lib`
 
 ## 7、训练
-```
+`
 必须保证所有的executor能够同时获取到资源并运行起来， executor-cores不需要设置，或者只能设置为1
-```
+`
 ```
 PYSPARK_DRIVER_PYTHON=Python/bin/python3 \
 PYSPARK_PYTHON=Python/bin/python3 \
