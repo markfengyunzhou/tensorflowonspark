@@ -1,3 +1,10 @@
+## version list
+* python v3.6
+* hadoop v2.9
+* spark v2.2
+* tensorflow v1.7
+* tensorflowonspark v1.3
+
 ## 1、安装python
 ```
 cd Python-3.6.0
