@@ -86,3 +86,43 @@ spark-submit \
 /user/hpe/mnist_model/model.ckpt-601.index
 /user/hpe/mnist_model/model.ckpt-601.meta
 ```
+## 8、预测
+`PYSPARK_DRIVER_PYTHON=Python/bin/python3 \
+PYSPARK_PYTHON=Python/bin/python3 \
+spark-submit \
+--master yarn \
+--deploy-mode cluster \
+--num-executors 3 \
+--executor-memory 20G \
+--driver-memory 10G \
+--py-files /home/hpe/TensorFlowOnSpark/examples/mnist/spark/mnist_dist.py \
+--conf spark.dynamicAllocation.enabled=false \
+--conf spark.yarn.maxAppAttempts=1 \
+--archives hdfs:///user/${USER}/Python.zip#Python \
+--conf spark.executorEnv.LD_LIBRARY_PATH="${JAVA_HOME}/jre/lib/amd64/server" \
+--conf spark.executorEnv.CLASSPATH="$($HADOOP_HOME/bin/hadoop classpath --glob):${CLASSPATH}" \
+--jars /home/hpe/ecosystem/hadoop/target/tensorflow-hadoop-1.6.0.jar \
+--archives hdfs:///lib/Python.zip#Python \
+/home/hpe/TensorFlowOnSpark/examples/mnist/spark/mnist_spark.py \
+--images hdfs:///user/hpe/mnist/csv/train/images \
+--labels hdfs:///user/hpe/mnist/csv/train/labels \
+--mode inference \
+--model mnist_model \
+--output predictions
+`
+
+`输出预测结果
+`
+```
+/user/hpe/predictions/_SUCCESS
+/user/hpe/predictions/part-00000
+/user/hpe/predictions/part-00001
+/user/hpe/predictions/part-00002
+/user/hpe/predictions/part-00003
+/user/hpe/predictions/part-00004
+/user/hpe/predictions/part-00005
+/user/hpe/predictions/part-00006
+/user/hpe/predictions/part-00007
+/user/hpe/predictions/part-00008
+/user/hpe/predictions/part-00009
+```
