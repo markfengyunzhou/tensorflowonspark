@@ -87,7 +87,8 @@ spark-submit \
 /user/hpe/mnist_model/model.ckpt-601.meta
 ```
 ## 8、预测
-`PYSPARK_DRIVER_PYTHON=Python/bin/python3 \
+```
+PYSPARK_DRIVER_PYTHON=Python/bin/python3 \
 PYSPARK_PYTHON=Python/bin/python3 \
 spark-submit \
 --master yarn \
@@ -109,7 +110,7 @@ spark-submit \
 --mode inference \
 --model mnist_model \
 --output predictions
-`
+```
 
 `输出预测结果
 `
