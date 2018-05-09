@@ -72,3 +72,16 @@ spark-submit \
 --format csv \
 --mode train \
 --model mnist_model
+
+`生成model
+/user/hpe/mnist_model/checkpoint
+/user/hpe/mnist_model/events.out.tfevents.1525836375.hpe01
+/user/hpe/mnist_model/events.out.tfevents.1525836376.hpe01
+/user/hpe/mnist_model/graph.pbtxt
+/user/hpe/mnist_model/model.ckpt-1.data-00000-of-00001
+/user/hpe/mnist_model/model.ckpt-1.index
+/user/hpe/mnist_model/model.ckpt-1.meta
+/user/hpe/mnist_model/model.ckpt-601.data-00000-of-00001
+/user/hpe/mnist_model/model.ckpt-601.index
+/user/hpe/mnist_model/model.ckpt-601.meta
+`
