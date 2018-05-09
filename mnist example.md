@@ -47,3 +47,28 @@ mvn clean package
 
 hadoop dfs -put  /home/hpe/ecosystem/hadoop/target/tensorflow-hadoop-1.6.0.jar /lib
 
+## 7、训练
+```
+必须保证所有的executor能够同时获取到资源并运行起来， executor-cores不需要设置，或者只能设置为1
+```
+PYSPARK_DRIVER_PYTHON=Python/bin/python3 \
+PYSPARK_PYTHON=Python/bin/python3 \
+spark-submit \
+--master yarn \
+--deploy-mode cluster \
+--num-executors  3 \
+--executor-memory 20G \
+--driver-memory 10G \
+--py-files /home/hpe/TensorFlowOnSpark/examples/mnist/spark/mnist_dist.py \
+--conf spark.dynamicAllocation.enabled=false \
+--conf spark.yarn.maxAppAttempts=1 \
+--conf spark.executorEnv.LD_LIBRARY_PATH="${JAVA_HOME}/jre/lib/amd64/server" \
+--conf spark.executorEnv.CLASSPATH="$($HADOOP_HOME/bin/hadoop classpath --glob):${CLASSPATH}" \
+--jars /home/hpe/ecosystem/hadoop/target/tensorflow-hadoop-1.6.0.jar \
+--archives hdfs:///lib/Python.zip#Python \
+/home/hpe/TensorFlowOnSpark/examples/mnist/spark/mnist_spark.py \
+--images hdfs:///user/hpe/mnist/csv/train/images \
+--labels hdfs:///user/hpe/mnist/csv/train/labels \
+--format csv \
+--mode train \
+--model mnist_model
